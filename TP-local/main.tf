@@ -41,15 +41,16 @@ resource "docker_image" "curl" {
 }
 
 resource "docker_container" "client" {
-  name  = "client"
+  count = var.client_count
+
+  name  = "client-${count.index}"
   image = docker_image.curl.image_id
 
-  # Connexion au même réseau
   networks_advanced {
     name = docker_network.app_network.name
   }
 
-  command = ["sh", "-c", "curl -s http://nginx:80 && sleep 3600"]
+  command = ["sh", "-c", "curl -s http://nginx:80 && sleep 30"]
 
   depends_on = [docker_container.nginx]
 }
