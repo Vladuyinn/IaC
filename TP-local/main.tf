@@ -49,10 +49,8 @@ resource "docker_container" "client" {
     name = docker_network.app_network.name
   }
 
-  # Exécution de curl vers l'alias nginx, suivi d'un sleep pour garder le conteneur en vie
   command = ["sh", "-c", "curl -s http://nginx:80 && sleep 3600"]
 
-  # On s'assure que Nginx est démarré en premier
   depends_on = [docker_container.nginx]
 }
 
