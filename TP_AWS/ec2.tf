@@ -20,7 +20,7 @@ resource "local_file" "private_key" {
 # Create EC2 instance with Nginx
 resource "aws_instance" "web" {
   ami             = "ami-12345678"
-  instance_type   = "t2.micro"
+  instance_type   = var.instance_type
   security_groups = [aws_security_group.web.name]
   key_name        = aws_key_pair.deployer.key_name
 
@@ -37,6 +37,6 @@ resource "aws_instance" "web" {
               EOF
 
   tags = {
-    Name = "nginx-server"
+    Name = var.instance_name
   }
 }
