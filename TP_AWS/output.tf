@@ -12,3 +12,8 @@ output "ssh_command" {
   description = "SSH command to connect to the instance"
   value       = "ssh -i deployer-key.pem ec2-user@${aws_instance.web.public_ip}"
 }
+
+output "bucket_id" {
+  description = "L'identifiant (id) du bucket S3 créé"
+  value       = aws_s3_bucket.demo_bucket.id
+}
