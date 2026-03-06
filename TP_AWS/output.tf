@@ -17,3 +17,8 @@ output "bucket_id" {
   description = "L'identifiant (id) du bucket S3 créé"
   value       = aws_s3_bucket.demo_bucket.id
 }
+
+output "db_instance_id" {
+  description = "ID de l'instance Base de Données"
+  value       = aws_instance.db_server.id
+}

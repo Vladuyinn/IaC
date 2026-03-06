@@ -40,3 +40,15 @@ resource "aws_instance" "web" {
     Name = var.instance_name
   }
 }
+
+resource "aws_instance" "db_server" {
+  ami             = "ami-12345678" # On garde la même AMI pour l'exemple 
+  instance_type   = var.instance_type # Utilisation de ta variable de l'Exo 1
+  security_groups = [aws_security_group.web.name] # 
+  key_name        = aws_key_pair.deployer.key_name # 
+
+  tags = {
+    Name = "database-server" # Identification claire du rôle
+    Type = "Backend"
+  }
+}
